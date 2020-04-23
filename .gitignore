@@ -1,0 +1,10 @@
+.vscode
+.env
+Pipfile
+client_secret.json
+
+notebooks/*
+modules/*
+
+function.zip
+
