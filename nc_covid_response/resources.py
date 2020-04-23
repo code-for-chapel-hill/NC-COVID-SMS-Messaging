@@ -32,6 +32,7 @@ class Resource(ABC):
     def __init__(self, record):
         self.record = record
         self.name = record[cc.RESOURCE_NAME_FIELD_NAME]
+        self._validated_record = None
 
     @abstractmethod
     def process(self):
@@ -44,16 +45,17 @@ class Resource(ABC):
         }
         try:
             self.dataclass(**subsetted_record)
+            self._validated_record = subsetted_record
             return subsetted_record
-        except:
+        except TypeError:
             logger.exception(
                 f"{subsetted_record} is not a valid {self.dataclass.__name__}"
             )
             raise TypeError
 
     def create_message(self):
-        validated_record = self.validate()
         try:
+            validated_record = self.validate()
             processed_record = self.process(validated_record)
         except:
             logger.exception(
@@ -61,6 +63,14 @@ class Resource(ABC):
             )
             raise ProcessorError
         return self.message_format.format(**processed_record)
+
+    @property
+    def validated_record(self):
+        if self._validated_record:
+            return self._validated_record
+        else:
+            validated_record = self.validate()
+            return validated_record
 
 
 class GenericResource(Resource):

@@ -63,6 +63,6 @@ def send_sms(event, context):
                 response.raise_for_status()
             except:
                 logger.info(
-                    f"Row {i} raised status {response.status_code}. Record: {subsetted_record}"
+                    f"Row {i} raised status {response.status_code}. Record: {resource.validated_record}"
                 )
                 continue

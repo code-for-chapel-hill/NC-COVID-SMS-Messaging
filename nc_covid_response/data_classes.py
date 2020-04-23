@@ -3,7 +3,6 @@ from dataclasses import dataclass
 
 @dataclass
 class GeneralDataClass:
-    sms_contact: str
     provider_name: str = ""
     status: str = ""
     sun: str = ""
