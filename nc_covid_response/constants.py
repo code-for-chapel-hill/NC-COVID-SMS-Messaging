@@ -23,7 +23,7 @@ Hours:
     Fri: {{fri}}
     Sat: {{sat}}
 Offers: {{offers}}
-    ""
+    """
     
     FARM_MESSAGE = f"""
 Name: {{provider_name}}
