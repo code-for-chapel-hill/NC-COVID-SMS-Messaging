@@ -82,3 +82,12 @@ class GenericResource(Resource):
     def process(self, record):
         record["status"] = helpers.convert_status(record["status"])
         return record
+    
+class FarmResource(Resource):
+
+    dataclass = FarmDataClass
+
+    message_format = cc.Messages.FARM_MESSAGE
+
+    def process(self, record):
+        return record
