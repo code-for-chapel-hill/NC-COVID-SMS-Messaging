@@ -13,3 +13,9 @@ class GeneralDataClass:
     fri: str = ""
     sat: str = ""
     offers: str = ""
+
+@dataclass
+class FarmDataClass:
+    provider_name: str = ""
+    instructions: str = ""
+    
