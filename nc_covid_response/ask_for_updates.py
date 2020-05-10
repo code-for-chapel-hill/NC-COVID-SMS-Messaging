@@ -1,4 +1,4 @@
-import os
+ import os
 import requests
 import json
 import logging
@@ -8,9 +8,10 @@ from oauth2client.service_account import ServiceAccountCredentials
 
 import constants as cc
 from exceptions import ProcessorError
-from resources import GenericResource
+from resources import get_resource
 
 logger = logging.getLogger(__name__)
+
 
 
 def send_sms(event, context):
@@ -34,17 +35,17 @@ def send_sms(event, context):
             continue
 
         records = worksheet.get_all_records()
-        active_resource_class = GenericResource
         for i, record in enumerate(records):
+            
             try:
                 phone_number = record[cc.PHONE_NUMBER_FIELD_NAME]
             except KeyError:
                 continue  # No phone number to text, so nothing to do.
-            resource = active_resource_class(record)
+            resource = get_resource(record)
             try:
                 message = resource.create_message()
-            except (TypeError, ProcessorError):
-                continue
+            except (TypeError, ProcessorError): 
+                continue #Log messages come from resource class
             params = json.dumps({"message": message, "name": resource.name})
             data = {
                 "To": phone_number,

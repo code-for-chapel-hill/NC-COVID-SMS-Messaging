@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 
 @dataclass
-class GeneralDataClass:
+class GenericDataClass:
     provider_name: str = ""
     status: str = ""
     sun: str = ""

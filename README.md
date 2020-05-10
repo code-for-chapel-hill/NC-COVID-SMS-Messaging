@@ -27,6 +27,14 @@ Put that in the same directory as ask_for_updates.py.
 
 Now run pip install -r requirements.txt in the base directory.
 
+You will need to set the following environmental variables
+
+    1. SPREADSHEET_KEY - They key of the google spreadsheet, which can be found in the URL
+    2. TWILIO_NUMBER - the Twilio phone number we are using for texting
+    3. FLOW_URL - the URL of the Twilio studio flow
+    4. TWILIO_ACCOUNT_SID - get from twilio account
+    5. TWILIO_AUTH_TOKEN - get from twilio account
+
 # Deploy
 This project is deployed as an AWS Lambda function. To deploy, zip the nc_covid_response directory (the directory with ask_for_updates.py) and use the AWS CLI to update the function code.
 
@@ -43,3 +51,6 @@ The lambda function runs on top of an AWS layer containing all the necessary thi
 3. aws lambda publish-layer-version --layer-name sms-packages --description "Packages for NC covid response SMS automated messaging" --zip-file fileb://modules.zip --compatible-runtimes python3.6 python3.7
 
 You will then need to head into the AWS Lambda consol and click on 'Layers' in the 'Designer' box. Change the version of the layer to the latest version.
+
+# Creating a new resource
+The data is split into different types of resources (farms, restaurants, etc.) The messages sent to different types of resources can be customized by creating a new resource class. See the abstract base class and docstring in resources.py for details.
