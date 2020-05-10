@@ -54,3 +54,7 @@ You will then need to head into the AWS Lambda consol and click on 'Layers' in t
 
 # Creating a new resource
 The data is split into different types of resources (farms, restaurants, etc.) The messages sent to different types of resources can be customized by creating a new resource class. See the abstract base class and docstring in resources.py for details.
+
+# Scheduling
+
+Task scheduling is handled by AWS EventBridge.
